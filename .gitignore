@@ -1,0 +1,16 @@
+__pycache__/
+api_key*.txt
+training_set/*.pcap
+data/*.pcap
+data_v2/*.pcap
+data_v3/*.pcap
+models/
+results/
+benchmark/
+*.swp
+*.env
+*.pcap
+*.seq
+benchmark_results/
+_consolidation_temp/
+.vscode/

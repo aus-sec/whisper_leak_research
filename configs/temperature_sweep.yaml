@@ -1,0 +1,33 @@
+# Example benchmark configuration
+
+# Benchmark config
+benchmark_name: lstm_temperature_sweep
+sampling_rate: 1.0
+num_trials: 5 # Number of trials to run for each model
+data_path: [./data/temperature/00, ./data/temperature/10, ./data/temperature/20, ./data/temperature/30, ./data/temperature/40, ./data/temperature/50, ./data/temperature/60, ./data/temperature/70, ./data/temperature/80, ./data/temperature/90, ./data/temperature/100]
+
+# Chatbots to benchmark with their common names
+chatbots:
+  - AzureGPT4o
+
+# Model settings
+model:
+  class: AttentionBiLSTMClassifier
+  params:
+    hidden_size: 128
+    num_layers: 2
+    dropout_rate: 0.3
+    embedding_dim: 32
+    fc_dims: [128, 64]
+    bidirectional: true
+    attention_dim: 64
+
+training:
+  # Training parameters
+  batch_size: 32
+  max_epochs: 100
+  learning_rate: 0.0002
+  patience: 20
+  test_size: 20
+  valid_size: 5
+  seed: 42

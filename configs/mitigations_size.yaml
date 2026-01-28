@@ -1,0 +1,137 @@
+# Example benchmark configuration
+
+# Benchmark config
+benchmark_name: lstm_batch_mitigations
+sampling_rate: 1
+num_trials: 5 # Number of trials to run for each model
+data_path: data/main
+feature_modes:
+  - "Both"
+  - "Data Size Only"      # Test how mitigations affect different features
+  - "Time Only"
+
+# Chatbots to benchmark with their common names. >80% AUPRC from size data.
+chatbots:
+  - mistrallarge
+  - azuredeepseekr1
+  - gpt4omini
+  - Grok3MiniBeta
+#  - mistralsmall
+#  - llama4maverickgroq
+#  - o1mini
+
+#  - deepseekr1
+#  - gpt41nano
+#  - grok2
+#  - gpt41mini
+#  - llama405blambda
+#  - deepseekv3
+#  - qwenturbo
+#  - llama8blambda
+#  - azuregpt41nano
+#  - azuregpt41mini
+#  - azuregpt4omini
+#  - azuregpt4o
+#  - claudehaiku
+
+# --- Mitigation Sets ---
+# Define different combinations of mitigations to test
+mitigations:
+  none: [] # Baseline - no mitigation
+
+  remove_empty_time_entries:
+    - type: RemoveZeroTimeEntriesMitigation
+      params: {}
+
+  batch_2:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 2}
+
+  batch_3:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 3}
+
+  batch_4:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 4}
+
+  batch_5:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 5}
+
+  batch_6:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 6}
+
+  batch_7:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 7}
+
+  batch_8:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 8}
+
+  batch_9:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 9}
+
+  batch_10:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 10}
+  
+  batch_11:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 11}
+
+  batch_12:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 12}
+
+  batch_13:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 13}
+
+  batch_14:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 14}
+
+  batch_15:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 15}
+
+  batch_16:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 16}
+
+  batch_17:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 17}
+
+  batch_18:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 18}
+
+  batch_19:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 19}
+
+  batch_20:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 20}
+
+# Model settings
+model:
+  class: LightGBMClassifier
+  params:
+    n_estimators: 5000
+    learning_rate: 0.02
+
+training:
+  # Training parameters
+  batch_size: 32
+  max_epochs: 100
+  learning_rate: 0.0002
+  patience: 20
+  test_size: 20
+  valid_size: 5
+  seed: 42

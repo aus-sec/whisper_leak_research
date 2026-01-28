@@ -1,0 +1,657 @@
+# Example benchmark configuration
+
+# Benchmark config
+benchmark_name: lgmb_injection
+sampling_rate: 1
+num_trials: 5 # Number of trials to run for each model
+data_path: data/main
+feature_modes:
+  - "Both"
+  - "Data Size Only"      # Test how mitigations affect different features
+  - "Time Only"
+
+# Chatbots to benchmark with their common names. >=0.8 AUPRC from time data.
+chatbots:
+  - mistrallarge
+  - azuredeepseekr1
+  - gpt4omini
+  - Grok3MiniBeta
+
+# --- Mitigation Sets ---
+# Define different combinations of mitigations to test
+mitigations:
+  none: [] # Baseline - no mitigation
+
+  remove_empty_time_entries:
+    - type: RemoveZeroTimeEntries
+      params: {}
+
+  # ====================================================================
+  # === Packet Injection - size_std_multiplier = 1.0 (Default)
+  # ====================================================================
+
+  # 2.0 injection stddev
+  injection_0p5mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+
+  injection_0p75mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+
+  injection_1mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+
+  injection_1p25mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+
+  injection_1p5mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+
+  injection_2mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+
+  injection_2p5mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+
+  injection_3mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+
+  injection_3p5mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+
+  injection_4mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+
+  injection_5mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+  
+  injection_6mean_2std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 1.0}
+
+  # 1.0 injection stddev
+  injection_0p5mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  injection_0p75mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  injection_1mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  injection_1p25mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  injection_1p5mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  injection_2mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  injection_2p5mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  injection_3mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  injection_3p5mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  injection_4mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  injection_5mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  injection_6mean_1std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 1.0}
+
+  # 0.5 injection stddev
+  injection_0p5mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+
+  injection_0p75mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+
+  injection_1mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+
+  injection_1p25mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+
+  injection_1p5mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+
+  injection_2mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+
+  injection_2p5mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+
+  injection_3mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+
+  injection_3p5mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+
+  injection_4mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+
+  injection_5mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+
+  injection_6mean_0p5std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.0}
+  
+  # 0.25 injection stdev
+  injection_0p5mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  injection_0p75mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  injection_1mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  injection_1p25mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  injection_1p5mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  injection_2mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  injection_2p5mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  injection_3mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  injection_3p5mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  injection_4mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  injection_5mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  injection_6mean_0p25std_1stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+
+  # ====================================================================
+  # === Packet Injection - size_std_multiplier = 0.5
+  # ====================================================================
+
+  # 2.0 injection stddev
+  injection_0p5mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+
+  injection_0p75mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+
+  injection_1mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+
+  injection_1p25mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+
+  injection_1p5mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+
+  injection_2mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+
+  injection_2p5mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+
+  injection_3mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+
+  injection_3p5mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+
+  injection_4mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+
+  injection_5mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+  
+  injection_6mean_2std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 0.5}
+
+  # 1.0 injection stddev
+  injection_0p5mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  injection_0p75mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  injection_1mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  injection_1p25mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  injection_1p5mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  injection_2mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  injection_2p5mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  injection_3mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  injection_3p5mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  injection_4mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  injection_5mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  injection_6mean_1std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 0.5}
+
+  # 0.5 injection stddev
+  injection_0p5mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+
+  injection_0p75mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+
+  injection_1mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+
+  injection_1p25mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+
+  injection_1p5mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+
+  injection_2mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+
+  injection_2p5mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+
+  injection_3mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+
+  injection_3p5mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+
+  injection_4mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+
+  injection_5mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+
+  injection_6mean_0p5std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 0.5}
+  
+  # 0.25 injection stdev
+  injection_0p5mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  injection_0p75mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  injection_1mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  injection_1p25mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  injection_1p5mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  injection_2mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  injection_2p5mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  injection_3mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  injection_3p5mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  injection_4mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  injection_5mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  injection_6mean_0p25std_0p5stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+
+  # ====================================================================
+  # === Packet Injection - size_std_multiplier = 2.0
+  # ====================================================================
+
+  # 2.0 injection stddev
+  injection_0p5mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+
+  injection_0p75mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+
+  injection_1mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+
+  injection_1p25mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+
+  injection_1p5mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+
+  injection_2mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+
+  injection_2p5mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+
+  injection_3mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+
+  injection_3p5mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+
+  injection_4mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+
+  injection_5mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+  
+  injection_6mean_2std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 2.0, size_std_multiplier: 2.0}
+
+  # 1.0 injection stddev
+  injection_0p5mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  injection_0p75mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  injection_1mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  injection_1p25mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  injection_1p5mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  injection_2mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  injection_2p5mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  injection_3mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  injection_3p5mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  injection_4mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  injection_5mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  injection_6mean_1std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 2.0}
+
+  # 0.5 injection stddev
+  injection_0p5mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+
+  injection_0p75mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+
+  injection_1mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+
+  injection_1p25mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+
+  injection_1p5mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+
+  injection_2mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+
+  injection_2p5mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+
+  injection_3mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+
+  injection_3p5mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+
+  injection_4mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+
+  injection_5mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+
+  injection_6mean_0p5std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+  
+  # 0.25 injection stdev
+  injection_0p5mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+  injection_0p75mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.75, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+  injection_1mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+  injection_1p25mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.25, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+  injection_1p5mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+  injection_2mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+  injection_2p5mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+  injection_3mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+  injection_3p5mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 3.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+  injection_4mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+  injection_5mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 5, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+  injection_6mean_0p25std_2stdsize:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 6.0, injection_stddev_multiplier: 0.25, size_std_multiplier: 2.0}
+
+
+# Model settings
+model:
+  class: LightGBMClassifier
+  params:
+    n_estimators: 5000
+    learning_rate: 0.02
+
+# Model settings
+#model:
+#  class: AttentionBiLSTMClassifier
+#  params:
+#    hidden_size: 128
+#    num_layers: 2
+#    dropout_rate: 0.3
+#    embedding_dim: 32
+#    fc_dims: [128, 64]
+#    bidirectional: true
+#    attention_dim: 64
+
+training:
+  # Training parameters
+  batch_size: 32
+  max_epochs: 100
+  learning_rate: 0.0002
+  patience: 20
+  test_size: 20
+  valid_size: 5
+  seed: 42

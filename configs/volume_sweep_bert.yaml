@@ -1,0 +1,33 @@
+# Example benchmark configuration
+
+# Benchmark config
+benchmark_name: bert_volume_sweep
+sampling_rate: [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.0]
+num_trials: 5 # Number of trials to run for each model
+data_path: data/volume1
+feature_modes:
+  - "Both"
+
+# Chatbots to benchmark with their common names
+chatbots:
+  - AzureGPT4o
+
+# Model settings
+model:
+  class: BERTTimeSeriesClassifier
+  params:
+    fc_dims: [128, 64]
+    dropout_rate: 0.3
+    model_name: 'distilbert-base-uncased'
+    num_buckets: 50
+    interleave: false
+
+training:
+  # Training parameters
+  batch_size: 32
+  max_epochs: 100
+  learning_rate: 0.00001
+  patience: 20
+  test_size: 20
+  valid_size: 5
+  seed: 42

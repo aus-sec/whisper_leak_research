@@ -1,0 +1,21 @@
+# Example benchmark configuration
+
+# Benchmark config
+benchmark_name: obf
+sampling_rate: 1 # 100% of the data
+num_trials: 5 # Number of trials to run for each model
+data_path: data/obf
+
+# Chatbots to benchmark with their common names
+chatbots:
+  - "*"
+
+# Model settings
+model:
+  class: LightGBMClassifier
+  params:
+    n_estimators: 5000
+    learning_rate: 0.02
+
+training:
+  patience: 40
