@@ -1,3 +1,15 @@
+> ## **Information About This Fork**
+> This fork was created as part of a masters research project in order to evaluate performant and practical thresholds of the various mitigation mechanisms identified in the primary Whisper Leak research. I have decided to make it public in the rare chance it might assist students or home-lab researchers looking for a more approachable means of playing around with the Whisper Leak code. It is designed to facilitate small-scale testing of the GPT41Nano model (rather than exploring the entire set of models defined in the base project). 
+> 
+> This fork attempts to addresses the following:
+> - Programmatically hitting LLM API's can get expensive quickly. This fork contains PCAP training data for the GPT41Nano chatbot, as well as the corresponding JSON training prompts. This allows home-lab researchers to easily train their own inference classifiers and jump straight into the benchmarking phase.
+> - The original prompt files are simply massive, resulting in PCAP collection times taking many days (weeks in some cases). This fork contains slimmed down versions of the prompt files which allow for more reasonable collection times (if you still want to do this yourself). This will detriment inference model accuracy to some extent, so keep this in mind when assessing which collection you choose to run.
+> - The base config/mitigation files are a good place to start, but the output data they produce is quite overwhelming (tens of thousands of files/folders). This fork contains some simple, slimmed-down custom benchmarks to run instead, with outputs labelled on a scale of 0-5 mitigation aggression.
+> - If you are using vsCode, this fork contains a handy debugger launch file which is preloaded with many useful commands and arguments. Just ensure you have the Python and Python-Debugger vsCode extensions installed and it will work out-of-the-box.
+> 
+> A huge thank you to Jonathan Bar Or (@yo_yo_yo_jbo), and Geoff McDonald (@glmcdona)—The work you've done here is deeply inspiring (and a little unnerving!)
+
+
 # Whisper Leak
 
 Whisper Leak is a research toolkit that demonstrates how encrypted, streaming conversations with Large Language Models leak prompt information through packet sizes and timing. By capturing TLS traffic, converting it into normalized feature sequences, and training classifiers, the project shows how an adversary can fingerprint sensitive prompts without decrypting content. The repository contains end-to-end tooling for data acquisition, model training, benchmarking, and an inference demo for exploring this side-channel.
