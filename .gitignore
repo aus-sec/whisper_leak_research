@@ -13,4 +13,3 @@ benchmark/
 *.seq
 benchmark_results/
 _consolidation_temp/
-.vscode/
