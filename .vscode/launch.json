@@ -1,0 +1,71 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Timing Mitigations v1",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/whisper_leak_benchmark.py",
+            "console": "integratedTerminal",
+            "args": "-c configs/custom/mitigations_timing_v1.yaml",
+            "python": "${workspaceFolder}/.venv/Scripts/python"
+        },
+        {
+            "name": "Size Mitigations v1",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/whisper_leak_benchmark.py",
+            "console": "integratedTerminal",
+            "args": "-c configs/custom/mitigations_size_v1.yaml",
+            "python": "${workspaceFolder}/.venv/Scripts/python"
+        },
+                {
+            "name": "Both Mitigations v1",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/whisper_leak_benchmark.py",
+            "console": "integratedTerminal",
+            "args": "-c configs/custom/mitigations_both_v1.yaml",
+            "python": "${workspaceFolder}/.venv/Scripts/python"
+        },
+        {
+            "name": "Collector GPT41Nano Small",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/whisper_leak_collect.py",
+            "console": "integratedTerminal",
+            "args": "-c GPT41Nano -p ./prompts/custom/small.json -o data/small/GPT41Nano",
+            "python": "${workspaceFolder}/.venv/Scripts/python"
+        },
+        {
+            "name": "Collector GPT41Nano Medium",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/whisper_leak_collect.py",
+            "console": "integratedTerminal",
+            "args": "-c GPT41Nano -p ./prompts/custom/medium.json -o data/medium/GPT41Nano",
+            "python": "${workspaceFolder}/.venv/Scripts/python"
+        },
+        {
+            "name": "Collector GPT41Nano Large",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/whisper_leak_collect.py",
+            "console": "integratedTerminal",
+            "args": "-c GPT41Nano -p ./prompts/custom/large.json -o data/large/GPT41Nano",
+            "python": "${workspaceFolder}/.venv/Scripts/python"
+        },
+        {
+            "name": "Collector GPT41Nano Standard",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/whisper_leak_collect.py",
+            "console": "integratedTerminal",
+            "args": "-c GPT41Nano -p ./prompts/standard/prompts.json -o data/standard/GPT41Nano",
+            "python": "${workspaceFolder}/.venv/Scripts/python"
+        }
+    ]
+}
