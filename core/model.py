@@ -379,7 +379,7 @@ class TrainingSetCollector(object):
             percentage = (curr_count * 100) // total_datapoints if total_datapoints else 0
             PrintUtils.start_stage(
                 f'Generating training set ({curr_count} / {total_datapoints} = {percentage}%), '
-                f'{failed} failed. Latest: {data_length} events, {avg_size:.1f} bytes per event, '
+                f'{failed} failed. {skip_count} Skipped (exists in set). Latest: {data_length} events, {avg_size:.1f} bytes per event, '
                 f'{token_count} tokens. New entries: {new_entries}.',
                 override_prev=True
             )
