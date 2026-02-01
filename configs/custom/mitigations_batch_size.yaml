@@ -1,0 +1,56 @@
+# Example benchmark configuration
+
+# Benchmark config
+benchmark_name: lstm_batch_mitigations
+sampling_rate: 1
+num_trials: 5 # Number of trials to run for each model
+data_path: data/main
+feature_modes:
+  - "Data Size Only"      # Test how mitigations affect different features
+
+# Chatbots to benchmark with their common names. >80% AUPRC from size data.
+chatbots:
+  - gpt41nano
+
+# --- Mitigation Sets ---
+# Define different combinations of mitigations to test
+mitigations:
+  none: [] # Baseline - no mitigation
+
+  batch_2:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 2}
+
+  batch_6:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 8}
+
+  batch_10:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 14}
+
+  batch_14:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 20}
+
+  batch_18:
+    - type: PacketBatchingMitigation
+      params: {batch_size: 26}
+
+
+# Model settings
+model:
+  class: LightGBMClassifier
+  params:
+    n_estimators: 5000
+    learning_rate: 0.02
+
+training:
+  # Training parameters
+  batch_size: 32
+  max_epochs: 100
+  learning_rate: 0.0002
+  patience: 20
+  test_size: 20
+  valid_size: 5
+  seed: 42

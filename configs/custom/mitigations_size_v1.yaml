@@ -1,0 +1,64 @@
+# Example benchmark configuration
+
+# Benchmark config
+benchmark_name: lgmb_injection
+sampling_rate: 1
+num_trials: 5 # Number of trials to run for each model
+data_path: data/medium/GPT41Nano
+feature_modes:
+  - "Data Size Only"      # Test how mitigations affect different features
+
+# Chatbots to benchmark with their common names. >=0.8 AUPRC from time data.
+chatbots:
+  - gpt41nano
+
+# --- Mitigation Sets ---
+# Define different combinations of mitigations to test
+mitigations:
+  # Data Size Only Aggression Ladder
+  none: []  # baseline
+
+  aggr_1_low:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.25, injection_stddev_multiplier: 0.25, size_std_multiplier: 0.5}
+  aggr_2_mild:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 0.5, injection_stddev_multiplier: 0.25, size_std_multiplier: 1.0}
+  aggr_3_moderate:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 1.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 1.5}
+  aggr_4_high:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 2.0, injection_stddev_multiplier: 0.5, size_std_multiplier: 2.0}
+  aggr_5_very_high:
+    - type: PacketInjectionMitigation
+      params: {injections_per_mean: 4.0, injection_stddev_multiplier: 1.0, size_std_multiplier: 3.0}
+
+# Model settings
+model:
+  class: LightGBMClassifier
+  params:
+    n_estimators: 5000
+    learning_rate: 0.02
+
+# Model settings
+#model:
+#  class: AttentionBiLSTMClassifier
+#  params:
+#    hidden_size: 128
+#    num_layers: 2
+#    dropout_rate: 0.3
+#    embedding_dim: 32
+#    fc_dims: [128, 64]
+#    bidirectional: true
+#    attention_dim: 64
+
+training:
+  # Training parameters
+  batch_size: 32
+  max_epochs: 100
+  learning_rate: 0.0002
+  patience: 20
+  test_size: 20
+  valid_size: 5
+  seed: 42
